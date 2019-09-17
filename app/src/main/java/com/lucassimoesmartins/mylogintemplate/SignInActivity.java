@@ -6,32 +6,40 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText edtEmail, edtPassword;
-    Button btnLogin, btnFacebook, btnGoogle;
-    TextView txtForgotPassword, txtSignUp;
+    Button btnLogin, btnSignUp;
+    ImageButton btnGoogle, btnApple, btnFacebook, btnTwitter;
+    TextView txtForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sign_in);
 
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         btnLogin = findViewById(R.id.btnLogin);
-        btnFacebook = findViewById(R.id.btn_facebook);
-        btnGoogle = findViewById(R.id.btn_google);
+
         txtForgotPassword = findViewById(R.id.txtForgotPassword);
-        txtSignUp = findViewById(R.id.txtSignUp);
+        btnSignUp = findViewById(R.id.btnSignUp);
+
+        btnGoogle = findViewById(R.id.btnGoogle);
+        btnApple = findViewById(R.id.btnApple);
+        btnFacebook = findViewById(R.id.btnFacebook);
+        btnTwitter = findViewById(R.id.btnTwitter);
 
         btnLogin.setOnClickListener(this);
-        btnFacebook.setOnClickListener(this);
         btnGoogle.setOnClickListener(this);
+        btnApple.setOnClickListener(this);
+        btnFacebook.setOnClickListener(this);
+        btnTwitter.setOnClickListener(this);
+        btnSignUp.setOnClickListener(this);
         txtForgotPassword.setOnClickListener(this);
-        txtSignUp.setOnClickListener(this);
 
         getSupportActionBar().hide();
     }
@@ -43,21 +51,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnLogin:
                 //Call Login method here
                 break;
-            case R.id.btn_facebook:
-                //Call Facebook login method here
-                break ;
-            case R.id.btn_google:
+            case R.id.btnGoogle:
                 //Call Google login method here
                 break ;
-            case R.id.txtForgotPassword:
-                //Call Forgot password method here
+            case R.id.btnApple:
+                //Call Google login method here
                 break ;
-            case R.id.txtSignUp:
+            case R.id.btnFacebook:
+                //Call Facebook login method here
+                break ;
+            case R.id.btnTwitter:
+                //Call Facebook login method here
+                break ;
+            case R.id.btnSignUp:
 
                 Intent intent = new Intent(this, SignUpActivity.class);
                 startActivity(intent);
 
                 break;
+            case R.id.txtForgotPassword:
+                //Call Forgot password method here
+                break ;
         }
     }
 }
