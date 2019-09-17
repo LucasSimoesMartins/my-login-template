@@ -1,10 +1,20 @@
-# my-login-template
-It's my custom login template with firebase integration
+# My login template
 
-# Screenshots
+<img src="https://user-images.githubusercontent.com/25203907/65066137-2f93a500-d95a-11e9-910c-c3f8c2e13eb9.png" width="500" />
 
-Layout in Galaxy S7 <br/>
-<img src="https://user-images.githubusercontent.com/25203907/64132061-178d2480-cda3-11e9-940e-371f180a908e.jpg" width="250" />
+## About this project
+It isn't finished yet!
 
-Layout in Galaxy S10 <br/>
-<img src="https://user-images.githubusercontent.com/25203907/64132106-7eaad900-cda3-11e9-9a58-d2a83f98a2a1.png" width="250" />
+It's my custom login template with firebase integration.
+
+The idea is to create a login template for use in future projects.
+
+## Why?
+
+This project is part of my personal portfolio. I will be happy if you give me some feedback. I want to become a better developer!
+
+Connect with me on [LinkedIn](https://br.linkedin.com/in/lucassimoesmartins).
+
+Email: lucassimoes084@gmail.com
+
+You can use this Project as you wish, it's free!
