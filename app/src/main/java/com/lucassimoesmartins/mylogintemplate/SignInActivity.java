@@ -12,9 +12,9 @@ import android.widget.TextView;
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText edtEmail, edtPassword;
-    Button btnLogin, btnSignUp;
+    Button btnLogin;
     ImageButton btnGoogle, btnApple, btnFacebook, btnTwitter;
-    TextView txtForgotPassword;
+    TextView txtForgotPassword, txtSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         btnLogin = findViewById(R.id.btnLogin);
 
         txtForgotPassword = findViewById(R.id.txtForgotPassword);
-        btnSignUp = findViewById(R.id.btnSignUp);
+        txtSignUp = findViewById(R.id.txtSignUp);
 
         btnGoogle = findViewById(R.id.btnGoogle);
         btnApple = findViewById(R.id.btnApple);
@@ -38,7 +38,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         btnApple.setOnClickListener(this);
         btnFacebook.setOnClickListener(this);
         btnTwitter.setOnClickListener(this);
-        btnSignUp.setOnClickListener(this);
+        txtSignUp.setOnClickListener(this);
         txtForgotPassword.setOnClickListener(this);
 
         getSupportActionBar().hide();
@@ -63,7 +63,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btnTwitter:
                 //Call Facebook login method here
                 break ;
-            case R.id.btnSignUp:
+            case R.id.txtSignUp:
 
                 Intent intent = new Intent(this, SignUpActivity.class);
                 startActivity(intent);
