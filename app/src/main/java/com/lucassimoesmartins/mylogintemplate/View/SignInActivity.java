@@ -1,4 +1,4 @@
-package com.lucassimoesmartins.mylogintemplate;
+package com.lucassimoesmartins.mylogintemplate.View;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,18 +9,26 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.lucassimoesmartins.mylogintemplate.R;
+
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText edtEmail, edtPassword;
-    Button btnLogin;
-    ImageButton btnGoogle, btnApple, btnFacebook, btnTwitter;
-    TextView txtForgotPassword, txtSignUp;
+    private EditText edtEmail, edtPassword;
+    private Button btnLogin;
+    private ImageButton btnGoogle, btnApple, btnFacebook, btnTwitter;
+    private TextView txtForgotPassword, txtSignUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        setUi();
+
+        getSupportActionBar().hide();
+    }
+
+    private void setUi(){
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -40,8 +48,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         btnTwitter.setOnClickListener(this);
         txtSignUp.setOnClickListener(this);
         txtForgotPassword.setOnClickListener(this);
-
-        getSupportActionBar().hide();
     }
 
     @Override

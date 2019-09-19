@@ -1,9 +1,11 @@
-package com.lucassimoesmartins.mylogintemplate;
+package com.lucassimoesmartins.mylogintemplate.View;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.lucassimoesmartins.mylogintemplate.R;
 
 public class SplashActivity extends AppCompatActivity {
 
