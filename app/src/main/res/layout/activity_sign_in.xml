@@ -202,13 +202,6 @@
             android:src="@drawable/logo_google" />
 
         <ImageButton
-            android:id="@+id/btnApple"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/logo_apple" />
-
-        <ImageButton
             android:id="@+id/btnFacebook"
             android:layout_width="70dp"
             android:layout_height="70dp"

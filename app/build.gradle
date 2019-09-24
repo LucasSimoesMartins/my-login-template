@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
+apply plugin: 'io.fabric' //Firebase Crashlytics
+apply plugin: 'com.google.firebase.firebase-perf' //Firebase Performance
 
 android {
     compileSdkVersion 28
@@ -32,8 +33,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 
 
-    implementation 'com.google.firebase:firebase-core:17.0.1'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation 'com.google.firebase:firebase-core:17.0.1' //Firebase Analytics
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1' //Firebase Crashlytics
+    implementation 'com.google.firebase:firebase-perf:18.0.1' //Firebase Performance
+    implementation 'com.google.firebase:firebase-auth:18.1.0' //Firebase Auth
+    implementation 'com.google.android.gms:play-services-auth:17.0.0' //Firebase Auth
 
 }
 

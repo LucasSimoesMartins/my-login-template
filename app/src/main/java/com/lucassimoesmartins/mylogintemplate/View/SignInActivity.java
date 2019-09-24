@@ -15,7 +15,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     private EditText edtEmail, edtPassword;
     private Button btnLogin;
-    private ImageButton btnGoogle, btnApple, btnFacebook, btnTwitter;
+    private ImageButton btnGoogle, btnFacebook, btnTwitter;
     private TextView txtForgotPassword, txtSignUp;
 
     @Override
@@ -37,13 +37,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         txtSignUp = findViewById(R.id.txtSignUp);
 
         btnGoogle = findViewById(R.id.btnGoogle);
-        btnApple = findViewById(R.id.btnApple);
         btnFacebook = findViewById(R.id.btnFacebook);
         btnTwitter = findViewById(R.id.btnTwitter);
 
         btnLogin.setOnClickListener(this);
         btnGoogle.setOnClickListener(this);
-        btnApple.setOnClickListener(this);
         btnFacebook.setOnClickListener(this);
         btnTwitter.setOnClickListener(this);
         txtSignUp.setOnClickListener(this);
@@ -53,14 +51,17 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
 
+        Intent intent;
+
         switch (v.getId()){
             case R.id.btnLogin:
                 //Call Login method here
+
+                intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
             case R.id.btnGoogle:
-                //Call Google login method here
-                break ;
-            case R.id.btnApple:
                 //Call Google login method here
                 break ;
             case R.id.btnFacebook:
@@ -71,9 +72,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 break ;
             case R.id.txtSignUp:
 
-                Intent intent = new Intent(this, SignUpActivity.class);
+                intent = new Intent(this, SignUpActivity.class);
                 startActivity(intent);
-
                 break;
             case R.id.txtForgotPassword:
                 //Call Forgot password method here
