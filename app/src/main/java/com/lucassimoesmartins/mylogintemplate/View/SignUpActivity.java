@@ -5,12 +5,16 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.lucassimoesmartins.mylogintemplate.R;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private EditText edtEmail, edtPassword;
+    private Button btnFinish;
     private TextView txtLogin;
 
     @Override
@@ -21,29 +25,26 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         getSupportActionBar().hide();
 
         setUi();
-        showInitialFragment();
 
     }
 
     private void setUi(){
+        edtEmail = findViewById(R.id.edtEmail);
+        edtPassword = findViewById(R.id.edtPassword);
+        btnFinish = findViewById(R.id.btnFinish);
         txtLogin = findViewById(R.id.txtLogin);
 
+        btnFinish.setOnClickListener(this);
         txtLogin.setOnClickListener(this);
-    }
-
-    private void showInitialFragment() {
-        UserInfoFragment userInfoFragment = UserInfoFragment.newInstance();
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragmentTransaction.add(R.id.fragment_container, userInfoFragment).commit();
     }
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()){
+            case R.id.btnFinish:
+
+                break;
             case R.id.txtLogin:
                 finish();
                 break;
