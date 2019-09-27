@@ -14,7 +14,7 @@ import com.lucassimoesmartins.mylogintemplate.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btnSignOut;
+    private Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,21 +25,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setUi() {
-        btnSignOut = findViewById(R.id.btnSignOut);
+        btnLogout = findViewById(R.id.btnLogout);
 
-        btnSignOut.setOnClickListener(this);
+        btnLogout.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnSignOut:
+            case R.id.btnLogout:
 
                 GoogleSignInOptions.Builder gsoBuilder = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail();
                 GoogleSignIn.getClient(this, gsoBuilder.build()).signOut();
                 FirebaseAuth.getInstance().signOut();
 
-                Intent intent = new Intent(this, SignInActivity.class);
+                Intent intent = new Intent(this, LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;

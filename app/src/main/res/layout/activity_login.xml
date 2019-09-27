@@ -7,7 +7,7 @@
     android:background="@drawable/background_gradient"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".View.SignInActivity">
+    tools:context=".View.LoginActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/logo"

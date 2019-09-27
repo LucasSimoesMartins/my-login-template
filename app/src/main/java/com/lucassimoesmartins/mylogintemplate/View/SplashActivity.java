@@ -24,7 +24,7 @@ public class SplashActivity extends AppCompatActivity {
     private void openApp() {
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        final Class cls = currentUser != null ? MainActivity.class : SignInActivity.class;
+        final Class cls = currentUser != null ? MainActivity.class : LoginActivity.class;
 
         new Handler().postDelayed(new Runnable() {
             @Override
