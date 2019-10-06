@@ -36,3 +36,25 @@ There's only login, sign up and logout funcionality, so an empty activity with l
 - Firebase Analytics
 
 - Firebase Performance
+
+## Getting Started
+
+### Prerequisites
+
+To run this project, you need to have a firebase account and create a project.
+
+### Installing
+
+**Cloning the Repository**
+
+```
+$ git clone https://github.com/LucasSimoesMartins/my-login-template.git
+```
+
+**Setting project**
+
+Get your google-services.json and place it in the "app" folder.
+
+<img src="https://user-images.githubusercontent.com/25203907/66263710-aab7e080-e7cd-11e9-8e49-6b408bb01ba3.png"/>
+
+More details [here](https://developers.google.com/android/guides/google-services-plugin#adding_the_json_file).
