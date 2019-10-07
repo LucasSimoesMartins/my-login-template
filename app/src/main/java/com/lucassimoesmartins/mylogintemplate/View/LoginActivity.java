@@ -5,12 +5,20 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -20,6 +28,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.lucassimoesmartins.mylogintemplate.R;
@@ -28,8 +37,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private EditText edtEmail, edtPassword;
     private Button btnLogin;
-    private ImageButton btnGoogle, btnFacebook, btnTwitter;
     private TextView txtForgotPassword, txtSignUp;
+    private LoginButton btnFacebook;
+    private final String TAG = "LoginActivity debug";
+    private CallbackManager callbackManager;
+    private FirebaseAuth firebaseAuth;
+    private Button btnGoogle, btnCustomFacebook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         setUi();
+        firebaseAuth = FirebaseAuth.getInstance();
 
         getSupportActionBar().hide();
     }
@@ -50,15 +64,57 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         txtSignUp = findViewById(R.id.txtSignUp);
 
         btnGoogle = findViewById(R.id.btnGoogle);
-        btnFacebook = findViewById(R.id.btnFacebook);
-        btnTwitter = findViewById(R.id.btnTwitter);
+        btnCustomFacebook = findViewById(R.id.btnCustomFacebook);
 
         btnLogin.setOnClickListener(this);
         btnGoogle.setOnClickListener(this);
-        btnFacebook.setOnClickListener(this);
-        btnTwitter.setOnClickListener(this);
+        btnCustomFacebook.setOnClickListener(this);
         txtSignUp.setOnClickListener(this);
         txtForgotPassword.setOnClickListener(this);
+
+        configureFacebookLogin();
+    }
+
+    private void configureFacebookLogin() {
+        callbackManager = CallbackManager.Factory.create();
+        btnFacebook = findViewById(R.id.btnFacebook);
+        btnFacebook.setPermissions("email", "public_profile");
+
+        btnFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Log.d(TAG, "facebook:onSuccess:" + loginResult);
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Log.d(TAG, "facebook:onCancel");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d(TAG, "facebook:onError", error);
+            }
+        });
+    }
+
+    private void handleFacebookAccessToken(AccessToken token) {
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "signInWithCredential:success");
+                            navigateToMain();
+                        } else {
+                            LoginManager.getInstance().logOut();
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     @Override
@@ -67,6 +123,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         if (requestCode == 1) {
+            //Google login
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
@@ -74,9 +131,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-                // The ApiException status code indicates the detailed failure reason.
-                //Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+                Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             }
+        } else {
+            //Facebook login
+            callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -92,8 +151,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     navigateToMain();
                 } else {
-                    // If sign in fails, display a message to the user.
-                    // Log.w(TAG, "signInWithCredential:failure", task.getException());
+                    Log.w(TAG, "signInWithCredential:failure", task.getException());
                 }
             }
         });
@@ -121,13 +179,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent signInIntent = gsc.getSignInIntent();
                 startActivityForResult(signInIntent, 1);
 
-                break ;
-            case R.id.btnFacebook:
-                //Call Facebook login method here
-                break ;
-            case R.id.btnTwitter:
-                //Call Facebook login method here
-                break ;
+                break;
+            case R.id.btnCustomFacebook:
+
+                btnFacebook.performClick();
+
+                break;
             case R.id.txtSignUp:
 
                 Intent intent = new Intent(this, SignUpActivity.class);
@@ -135,7 +192,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.txtForgotPassword:
                 //Call Forgot password method here
-                break ;
+                break;
         }
     }
 }
