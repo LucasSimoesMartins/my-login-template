@@ -32,7 +32,6 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.lucassimoesmartins.mylogintemplate.R;
-import com.lucassimoesmartins.mylogintemplate.ResetPasswordActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 

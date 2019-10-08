@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ResetPasswordActivity"
+            android:name=".View.ResetPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".View.MainActivity"
