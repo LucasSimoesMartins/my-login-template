@@ -32,6 +32,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.lucassimoesmartins.mylogintemplate.R;
+import com.lucassimoesmartins.mylogintemplate.ResetPasswordActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -49,13 +50,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        setUi();
+        setUI();
         firebaseAuth = FirebaseAuth.getInstance();
 
         getSupportActionBar().hide();
     }
 
-    private void setUi(){
+    private void setUI(){
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -83,7 +84,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
@@ -105,16 +105,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "signInWithCredential:success");
-                            navigateToMain();
-                        } else {
-                            LoginManager.getInstance().logOut();
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+            if (task.isSuccessful()) {
+                navigateToMain();
+            } else {
+                LoginManager.getInstance().logOut();
+                Log.w(TAG, "signInWithCredential:failure", task.getException());
+                Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            }
+        });
     }
 
     @Override
@@ -131,7 +130,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-                Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+                Log.w(TAG, "Google signInResult:failed code=" + e.getStatusCode());
             }
         } else {
             //Facebook login
@@ -143,7 +142,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
 
-        FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
@@ -151,10 +150,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     navigateToMain();
                 } else {
-                    Log.w(TAG, "signInWithCredential:failure", task.getException());
+                    Log.w(TAG, "Google signInWithCredential:failure", task.getException());
+                    Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private void firebaseAuthWithEmail() {
+        if (edtEmail.getText().toString() != null && !edtEmail.getText().toString().equals("") && edtPassword.getText().toString() != null && !edtPassword.getText().toString().equals("")) {
+            firebaseAuth.signInWithEmailAndPassword(edtEmail.getText().toString(), edtPassword.getText().toString()).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        navigateToMain();
+                    } else {
+                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            Toast.makeText(LoginActivity.this, "Fill in all fields to continue", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void navigateToMain(){
@@ -166,18 +185,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
+        Intent intent;
+
         switch (v.getId()){
             case R.id.btnLogin:
-                //Call Login method here
 
+                firebaseAuthWithEmail();
                 break;
             case R.id.btnGoogle:
 
                 GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).requestEmail().build();
                 GoogleSignInClient gsc = GoogleSignIn.getClient(this, gso);
 
-                Intent signInIntent = gsc.getSignInIntent();
-                startActivityForResult(signInIntent, 1);
+                intent = gsc.getSignInIntent();
+                startActivityForResult(intent, 1);
 
                 break;
             case R.id.btnCustomFacebook:
@@ -187,11 +208,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.txtSignUp:
 
-                Intent intent = new Intent(this, SignUpActivity.class);
+                intent = new Intent(this, SignUpActivity.class);
                 startActivity(intent);
                 break;
             case R.id.txtForgotPassword:
-                //Call Forgot password method here
+
+                intent = new Intent(this, ResetPasswordActivity.class);
+                startActivity(intent);
                 break;
         }
     }

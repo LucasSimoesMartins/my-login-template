@@ -22,10 +22,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setUi();
+
+        setUI();
     }
 
-    private void setUi() {
+    private void setUI() {
         btnLogout = findViewById(R.id.btnLogout);
 
         btnLogout.setOnClickListener(this);
