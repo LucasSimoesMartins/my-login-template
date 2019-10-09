@@ -14,8 +14,6 @@ This project is part of my personal portfolio. I will be happy if you give me so
 
 Connect with me on [LinkedIn](https://br.linkedin.com/in/lucassimoesmartins).
 
-Email: lucassimoes084@gmail.com
-
 You can use this Project as you wish, it's free!
 
 ## Observations about this App
