@@ -69,7 +69,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 }
             });
         } else {
-            Toast.makeText(SignUpActivity.this, "Fill in all fields to continue", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUpActivity.this, getResources().getString(R.string.fill_in_all_fields_to_continue), Toast.LENGTH_SHORT).show();
         }
     }
 

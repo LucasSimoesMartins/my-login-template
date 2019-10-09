@@ -56,7 +56,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
                 }
             });
         } else {
-            Toast.makeText(ResetPasswordActivity.this, "Fill in the email field to continue", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ResetPasswordActivity.this, getResources().getString(R.string.fill_in_all_fields_to_continue), Toast.LENGTH_SHORT).show();
         }
     }
 

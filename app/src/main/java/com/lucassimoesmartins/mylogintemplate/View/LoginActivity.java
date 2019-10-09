@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private final String TAG = "LoginActivity debug";
     private CallbackManager callbackManager;
     private FirebaseAuth firebaseAuth;
-    private Button btnGoogle, btnCustomFacebook;
+    private ImageButton btnGoogle, btnCustomFacebook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,7 +172,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             });
         } else {
-            Toast.makeText(LoginActivity.this, "Fill in all fields to continue", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this, getResources().getString(R.string.fill_in_all_fields_to_continue), Toast.LENGTH_SHORT).show();
         }
     }
 

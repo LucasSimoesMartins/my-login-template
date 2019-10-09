@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">My Login Template</string>
+    <string name="fill_in_all_fields_to_continue">Fill in all fields to continue</string>
+    <string name="my">My</string>
+    <string name="login">Login</string>
+    <string name="template">Template</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_the_password">Forgot the password?</string>
+    <string name="don_t_have_an_account_sign_up_now">Don\'t have an account? Sign up now!</string>
+    <string name="or">OR</string>
+    <string name="main_activity">Main Activity</string>
+    <string name="sign_out">Sign out</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="send">Send</string>
+    <string name="back_to_log_in">Back to Log in</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="finish">Finish</string>
+    <string name="already_member_log_in_here">Already member? Log in here</string>
+    <string name="logo_pencil_image">Logo pencil image</string>
+    <string name="facebook_button">Facebook button</string>
+    <string name="google_button">Google button</string>
 </resources>

@@ -21,32 +21,33 @@
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            app:srcCompat="@drawable/ic_pencil_white" />
+            app:srcCompat="@drawable/ic_pencil_white"
+            android:contentDescription="@string/logo_pencil_image" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="My"
+                android:text="@string/my"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="@string/login"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Template"
+                android:text="@string/template"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
@@ -85,7 +86,7 @@
                 android:drawableStart="@drawable/ic_email_white"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:paddingRight="45dp"
                 android:textColor="@android:color/white"
@@ -109,7 +110,7 @@
                 android:drawableStart="@drawable/ic_key_white"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textColor="@android:color/white"
                 android:theme="@style/LoginColor" />
@@ -120,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Forgot the password?"
+            android:text="@string/forgot_the_password"
             android:textSize="14sp"
             android:theme="@style/Hiperlink" />
 
@@ -131,7 +132,7 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/button_rounded"
             android:backgroundTint="#0099ff"
-            android:text="Login"
+            android:text="@string/login"
             android:textAllCaps="false"
             android:textColor="@android:color/white" />
 
@@ -142,7 +143,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Don't have an account? Sign up now!"
+        android:text="@string/don_t_have_an_account_sign_up_now"
         android:textSize="18sp"
         android:textStyle="bold"
         android:theme="@style/Hiperlink"
@@ -176,7 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="OR"
+            android:text="@string/or"
             android:textColor="@android:color/white" />
 
         <View
@@ -197,25 +198,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat2">
 
-        <Button
+        <ImageButton
             android:id="@+id/btnGoogle"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_margin="5dp"
-            android:background="#F44336"
-            android:text="Login with Google"
-            android:textAllCaps="false"
-            android:textColor="#ffffff"
-            android:textSize="18sp"
-            android:layout_weight="1"/>
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/logo_google"
+            android:contentDescription="@string/google_button" />
 
         <FrameLayout
             android:id="@+id/FrameLayout1"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_below="@+id/no_network_bar"
-            android:layout_weight="1">
+            android:layout_marginStart="20dp">
 
             <com.facebook.login.widget.LoginButton
                 android:id="@+id/btnFacebook"
@@ -224,15 +218,12 @@
                 android:layout_gravity="center_horizontal"
                 android:visibility="gone" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnCustomFacebook"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="#3B5998"
-                android:text="Login with Facebook"
-                android:textAllCaps="false"
-                android:textColor="#ffffff"
-                android:textSize="18sp" />
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/logo_facebook"
+                android:contentDescription="@string/facebook_button" />
         </FrameLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
