@@ -164,7 +164,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        navigateToMain();
+                        if(firebaseAuth.getCurrentUser().isEmailVerified()) {
+                            navigateToMain();
+                        } else {
+                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.check_your_email_to_activate_your_account), Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         Log.w(TAG, "signInWithEmail:failure", task.getException());
                         Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();

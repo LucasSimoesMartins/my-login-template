@@ -20,4 +20,5 @@
     <string name="logo_pencil_image">Logo pencil image</string>
     <string name="facebook_button">Facebook button</string>
     <string name="google_button">Google button</string>
+    <string name="check_your_email_to_activate_your_account">Check your email to activate your account</string>
 </resources>

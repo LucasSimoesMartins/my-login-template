@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -61,7 +64,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        navigateToMain();
+                        firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    logoutUser();
+                                    Toast.makeText(SignUpActivity.this, getResources().getString(R.string.check_your_email_to_activate_your_account), Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            }
+                        });
                     } else {
                         Log.w(TAG, "createUserWithEmail:failure", task.getException());
                         Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -71,6 +83,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         } else {
             Toast.makeText(SignUpActivity.this, getResources().getString(R.string.fill_in_all_fields_to_continue), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void logoutUser() {
+        GoogleSignInOptions.Builder gsoBuilder = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail();
+        GoogleSignIn.getClient(this, gsoBuilder.build()).signOut();
+        FirebaseAuth.getInstance().signOut();
+        LoginManager.getInstance().logOut();
     }
 
     @Override
