@@ -1,9 +1,8 @@
 # My login template
 
-<img src="https://user-images.githubusercontent.com/25203907/65641787-09a67a00-dfc4-11e9-97d4-f5397925f8b4.png"/>
+<img src="https://user-images.githubusercontent.com/25203907/66509971-792f6580-eaaa-11e9-97aa-73c1aaaeac7b.png"/>
 
 ## About this project
-It isn't finished yet!
 
 It's my custom login template with firebase integration.
 
@@ -29,7 +28,10 @@ There's only login, sign up and logout funcionality, so an empty activity with l
   - Email/password
   - Google account
   - Facebook account
-  - Twitter account
+
+- Email verification in email/password authentication
+
+- Password reset in email/password authentication
   
 - Firebase Crashlytics
 
@@ -41,7 +43,9 @@ There's only login, sign up and logout funcionality, so an empty activity with l
 
 ### Prerequisites
 
-To run this project, you need to have a firebase account and create a project.
+To run this project, you need to have a firebase account and create a project. More details [here](https://firebase.google.com/docs/android/setup?#create-firebase-project).
+
+You need to have a facebook developer account. More details [here](https://developers.facebook.com).
 
 ### Installing
 
@@ -51,10 +55,28 @@ To run this project, you need to have a firebase account and create a project.
 $ git clone https://github.com/LucasSimoesMartins/my-login-template.git
 ```
 
-**Setting project**
+**Adding google-services.json file**
 
 Get your google-services.json and place it in the "app" folder.
 
 <img src="https://user-images.githubusercontent.com/25203907/66263710-aab7e080-e7cd-11e9-8e49-6b408bb01ba3.png"/>
 
 More details [here](https://developers.google.com/android/guides/google-services-plugin#adding_the_json_file).
+
+
+**Setting up facebook authentication**
+
+Facebook documentation [here](https://developers.facebook.com/docs/facebook-login/android).
+
+- First, create a new app.
+
+<img src="https://user-images.githubusercontent.com/25203907/66506354-9280e380-eaa3-11e9-935f-54bae21e9eac.png"/>
+
+- Later, open the file app/res/values/credentials.xml and enter the "facebook_app_id" and "fb_login_protocol_scheme" that was given in fourth step of facebook documentation.
+
+<img src="https://user-images.githubusercontent.com/25203907/66506552-eee40300-eaa3-11e9-9cd7-f2bd81d29389.png"/>
+<img src="https://user-images.githubusercontent.com/25203907/66506972-b690f480-eaa4-11e9-8cdb-3f8366155ca5.png"/>
+
+- Finally, follow the fifth and sixth steps to enable the Facebook authentication.
+
+<img src="https://user-images.githubusercontent.com/25203907/66507320-61a1ae00-eaa5-11e9-95a2-1214cd66d7a9.png"/>
